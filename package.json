@@ -1,0 +1,59 @@
+{
+  "name": "character-local",
+  "version": "0.1.0-alpha",
+  "description":
+    "Username and password authenticator for Character (registration, login, and password reset)",
+  "main": "lib",
+  "scripts": {
+    "prebuild": "npm run lint && npm run clean-build",
+    "build": "npm run build:src",
+    "build-ci": "npm run build:src",
+    "build-watch": "npm run build -- -- --watch",
+    "build:src": "babel src --out-dir lib --copy-files --source-maps inline",
+    "check-security": "nsp check",
+    "clean-build": "rimraf lib",
+    "link": "npm link character-authenticator",
+    "lint": "npm run lint-ci -- --fix",
+    "lint-ci": "eslint --format=table .",
+    "test": "mocha lib/**/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HiFaraz/character-local.git"
+  },
+  "keywords": [
+    "auth",
+    "identity",
+    "sso",
+    "authentication",
+    "authorization",
+    "access",
+    "control"
+  ],
+  "author": "Faraz Syed <hello@farazsyed.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HiFaraz/character-local/issues"
+  },
+  "homepage": "https://github.com/HiFaraz/character-local#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.10.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "nsp": "^2.8.1",
+    "prettier": "^1.7.4",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "asyncpipe": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "http-codes": "^1.0.0"
+  },
+  "peerDependencies": {
+    "sequelize": "^4.0.0"
+  }
+}
