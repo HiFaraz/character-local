@@ -1,20 +1,14 @@
 {
   "name": "character-local",
   "version": "0.1.0-alpha",
-  "description":
-    "Username and password authenticator for Character (registration, login, and password reset)",
+  "description": "Username and password authenticator for Character (registration, login, and password reset)",
   "main": "lib",
   "scripts": {
-    "prebuild": "npm run lint && npm run clean-build",
-    "build": "npm run build:src",
-    "build-ci": "npm run build:src",
-    "build-watch": "npm run build -- -- --watch",
-    "build:src": "babel src --out-dir lib --copy-files --source-maps inline",
-    "check-security": "nsp check",
-    "clean-build": "rimraf lib",
-    "link": "npm link character-authenticator",
-    "lint": "npm run lint-ci -- --fix",
-    "lint-ci": "eslint --format=table .",
+    "prebuild": "nsp check && npm run lint && rimraf lib",
+    "build": "babel src --out-dir lib --copy-files --source-maps inline",
+    "build-watch": "npm run build -- --watch",
+    "lint": "eslint --format=table .",
+    "prepublish": "npm run build && npm test",
     "test": "mocha lib/**/*.spec.js"
   },
   "repository": {
