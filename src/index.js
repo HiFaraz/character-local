@@ -8,6 +8,7 @@ import { INTERNAL_SERVER_ERROR, SEE_OTHER, UNAUTHORIZED } from 'http-codes';
 import Authenticator from 'character-authenticator/post';
 // import PassportAdapter from 'character-passport/post';
 import asyncpipe from 'asyncpipe';
+import createError from 'http-errors';
 import models from './models';
 
 // TODO make this a separate module that can be used to apply Passport strategies
@@ -15,9 +16,9 @@ void class PassportStrategyAuthenticator {
   async authenticate({ req, res }) {
     return new Promise((resolve, reject) => {
       if (!this.strategy) {
-        const error = new Error('Passport strategy not defined');
-        error.httpStatusCode = INTERNAL_SERVER_ERROR;
-        return reject(error);
+        return reject(
+          createError(INTERNAL_SERVER_ERROR, 'Passport strategy not defined'),
+        );
       }
 
       const strategy = Object.create(this.strategy);
@@ -27,16 +28,14 @@ void class PassportStrategyAuthenticator {
        */
 
       strategy.error = function(error) {
-        error.httpStatusCode = error.httpStatusCode || INTERNAL_SERVER_ERROR;
-        reject(error);
+        error.statusCode = error.statusCode || INTERNAL_SERVER_ERROR;
+        reject(createError(error));
       };
 
       strategy.fail = function(challenge, status = UNAUTHORIZED) {
         const _status = typeof challenge === 'number' ? challenge : status;
 
-        const error = new Error('Unable to authenticate');
-        error.httpStatusCode = _status;
-        reject(error);
+        reject(createError(_status, 'Unable to authenticate'));
       };
 
       // redirects should only happen on a GET request based authenticator

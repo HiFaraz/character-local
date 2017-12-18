@@ -6,6 +6,7 @@
 import { OK, UNAUTHORIZED } from 'http-codes';
 import { compare as compareHash, hash as generateHash } from 'bcryptjs';
 import Sequelize from 'sequelize';
+import createError from 'http-errors';
 
 const saltRounds = 12; // TODO read this from config, don't hardcode this
 
@@ -49,10 +50,7 @@ export default {
            * the application may reveal whether a username exists, such as a
            * sign-up page or public profile page
            */
-          // TODO use a http error package, such as `http-errors`
-          const error = new Error('Unable to authenticate');
-          error.httpStatusCode = UNAUTHORIZED;
-          throw error;
+          throw createError(UNAUTHORIZED, 'Unable to authenticate');
         }
       };
 

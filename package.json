@@ -45,7 +45,8 @@
   "dependencies": {
     "asyncpipe": "^1.0.0",
     "bcryptjs": "^2.4.3",
-    "http-codes": "^1.0.0"
+    "http-codes": "^1.0.0",
+    "http-errors": "^1.6.2"
   },
   "peerDependencies": {
     "sequelize": "^4.0.0"
