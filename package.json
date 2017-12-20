@@ -4,11 +4,9 @@
   "description": "Username and password authenticator for Character (registration, login, and password reset)",
   "main": "lib",
   "scripts": {
-    "prebuild": "nsp check && npm run lint && rimraf lib",
-    "build": "babel src --out-dir lib --copy-files --source-maps inline",
-    "build-watch": "npm run build -- --watch",
+    "build": "depcheck && nsp check && npm run lint && npm test && echo Build successful",
     "lint": "eslint --format=table .",
-    "prepublish": "npm run build && npm test",
+    "prepublish": "npm run build",
     "test": "mocha lib/**/*.spec.js"
   },
   "repository": {
@@ -31,16 +29,13 @@
   },
   "homepage": "https://github.com/HiFaraz/character-local#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "depcheck": "^0.6.8",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.7.0",
     "eslint-plugin-prettier": "^2.3.1",
-    "express": "^4.16.2",
     "mocha": "^4.0.1",
     "nsp": "^2.8.1",
-    "prettier": "^1.7.4",
-    "rimraf": "^2.6.2"
+    "prettier": "^1.7.4"
   },
   "dependencies": {
     "asyncpipe": "^1.0.0",
