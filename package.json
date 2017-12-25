@@ -1,6 +1,6 @@
 {
   "name": "character-local",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
   "description": "Username and password authenticator for Character (registration, login, and password reset)",
   "main": "lib",
   "scripts": {
