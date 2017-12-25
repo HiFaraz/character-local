@@ -44,7 +44,7 @@
     "http-errors": "^1.6.2"
   },
   "peerDependencies": {
-    "character-authenticator": "^0.0.0",
+    "character-authenticator": "^0.1.0",
     "sequelize": "^4.0.0"
   }
 }
